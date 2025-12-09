@@ -346,31 +346,31 @@ function syncChartButtons() {
   });
 }
 
-function loadVisitorCount() {
-  if (!dom.visitorPill) return;
-  const todayKey = new Date().toISOString().slice(0, 10);
-  const hitFlagKey = `${VISITOR_LOCAL_KEY}-${todayKey}`;
-  const hasHitToday = localStorage.getItem(hitFlagKey);
+// function loadVisitorCount() {
+//   if (!dom.visitorPill) return;
+//   const todayKey = new Date().toISOString().slice(0, 10);
+//   const hitFlagKey = `${VISITOR_LOCAL_KEY}-${todayKey}`;
+//   const hasHitToday = localStorage.getItem(hitFlagKey);
 
-  const base = 'https://api.countapi.dev/v1';
-  const hitUrl = `${base}/hit/${VISITOR_NAMESPACE}/${VISITOR_KEY}`;
-  const getUrl = `${base}/get/${VISITOR_NAMESPACE}/${VISITOR_KEY}`;
-  const url = hasHitToday ? getUrl : hitUrl;
+//   const base = 'https://api.countapi.dev/v1';
+//   const hitUrl = `${base}/hit/${VISITOR_NAMESPACE}/${VISITOR_KEY}`;
+//   const getUrl = `${base}/get/${VISITOR_NAMESPACE}/${VISITOR_KEY}`;
+//   const url = hasHitToday ? getUrl : hitUrl;
 
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      if (typeof data.value === 'number') {
-        dom.visitorPill.textContent = `You are visitor #${data.value}`;
-        if (!hasHitToday) localStorage.setItem(hitFlagKey, '1');
-      } else {
-        dom.visitorPill.textContent = 'Visitor count unavailable';
-      }
-    })
-    .catch(() => {
-      dom.visitorPill.textContent = 'Visitor count unavailable';
-    });
-}
+//   fetch(url)
+//     .then((res) => res.json())
+//     .then((data) => {
+//       if (typeof data.value === 'number') {
+//         dom.visitorPill.textContent = `You are visitor #${data.value}`;
+//         if (!hasHitToday) localStorage.setItem(hitFlagKey, '1');
+//       } else {
+//         dom.visitorPill.textContent = 'Visitor count unavailable';
+//       }
+//     })
+//     .catch(() => {
+//       dom.visitorPill.textContent = 'Visitor count unavailable';
+//     });
+// }
 
 function update() {
   const activeMonth = getActiveMonthDate();
