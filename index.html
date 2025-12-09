@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habit Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="top-bar">
+      <button class="icon-button" id="back-btn" aria-label="Previous month">
+        <span aria-hidden="true">&#8249;</span>
+      </button>
+      <div class="title-group">
+        <h1>Habit Tracker</h1>
+      </div>
+    </header>
+
+    <section class="month-nav">
+      <button class="icon-button" id="month-prev" aria-label="Previous month">&#8249;</button>
+      <h2 id="month-label"></h2>
+      <button class="icon-button" id="month-next" aria-label="Next month">&#8250;</button>
+    </section>
+
+    <section class="table-wrap">
+      <table id="habit-table">
+        <thead id="table-head"></thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </section>
+
+    <section class="add-row">
+      <button id="add-habit" class="ghost-button">
+        <span class="plus">+</span>
+        <span>Add Habit</span>
+      </button>
+    </section>
+
+    <section class="chart-panel">
+      <div class="chart-controls">
+        <span>Chart:</span>
+        <div class="pill-toggle" id="chart-toggle">
+          <button data-mode="line">Line</button>
+          <button data-mode="smooth" class="active">Smooth</button>
+          <button data-mode="bar">Bar</button>
+        </div>
+      </div>
+      <div class="chart-area">
+        <canvas id="progress-canvas" width="1320" height="240"></canvas>
+      </div>
+    </section>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
