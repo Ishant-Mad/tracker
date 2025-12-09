@@ -16,6 +16,7 @@ body {
   max-width: 1400px;
   margin: 16px auto 24px;
   background: #f8f8f8;
+  padding-bottom: 8px;
 }
 
 .top-bar {
@@ -28,9 +29,11 @@ body {
 }
 
 .title-group h1 {
-  font-size: 24px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  font-size: 22px;
+  letter-spacing: 0.3px;
+  text-transform: none;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .title-group {
@@ -40,10 +43,10 @@ body {
 }
 
 .title-logo {
-  height: 36px;
-  width: 36px;
-  max-height: 36px;
-  max-width: 36px;
+  height: 32px;
+  width: 32px;
+  max-height: 32px;
+  max-width: 32px;
   object-fit: contain;
   flex-shrink: 0;
   display: block;
@@ -303,22 +306,26 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 12px 4px 4px;
+  padding: 10px 4px 8px;
   color: #555;
-  font-size: 14px;
+  font-size: 13px;
+  flex-wrap: wrap;
 }
 
 .footer-credit {
   color: #666;
-  font-size: 14px;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .notice {
   margin: 0;
-  padding: 8px 10px;
+  padding: 8px 12px;
   background: #f6f6f6;
   border: 1px solid #e6e6e6;
-  border-radius: 6px;
+  border-radius: 8px;
   color: #555;
   font-size: 13px;
 }
@@ -329,10 +336,7 @@ body {
   font-weight: 700;
 }
 
-.footer-link:hover {
-  color: #000;
-}
-
+.footer-link:hover,
 .footer-link:visited {
   color: #111;
 }
