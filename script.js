@@ -12,6 +12,18 @@ const dom = {
   canvas: document.getElementById('progress-canvas'),
 };
 
+function ensureCanvasSize() {
+  const ratio = window.devicePixelRatio || 1;
+  const rect = dom.canvas.parentElement.getBoundingClientRect();
+  const displayWidth = Math.max(Math.floor(rect.width * ratio), 300);
+  const displayHeight = Math.max(Math.floor(rect.height * ratio), 160 * ratio);
+  if (dom.canvas.width !== displayWidth || dom.canvas.height !== displayHeight) {
+    dom.canvas.width = displayWidth;
+    dom.canvas.height = displayHeight;
+  }
+  return { width: displayWidth / ratio, height: displayHeight / ratio, ratio };
+}
+
 function pad(n) {
   return n.toString().padStart(2, '0');
 }
@@ -264,8 +276,8 @@ function drawSmoothLine(ctx, points) {
 
 function drawChart(mode, activeDate) {
   const ctx = dom.canvas.getContext('2d');
-  const width = dom.canvas.width;
-  const height = dom.canvas.height;
+  const { width, height, ratio } = ensureCanvasSize();
+  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
   ctx.clearRect(0, 0, width, height);
 
   const data = totalsByDay(activeDate);
@@ -355,6 +367,10 @@ function attachEvents() {
     if (e.target.tagName !== 'BUTTON') return;
     chartMode = e.target.dataset.mode;
     syncChartButtons();
+    drawChart(chartMode, getActiveMonthDate());
+  });
+
+  window.addEventListener('resize', () => {
     drawChart(chartMode, getActiveMonthDate());
   });
 }

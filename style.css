@@ -9,11 +9,12 @@ body {
   background: #f5f5f5;
   color: #111;
   min-height: 100vh;
+  padding: 0 8px;
 }
 
 .app {
   max-width: 1400px;
-  margin: 20px auto;
+  margin: 16px auto 24px;
   background: #f8f8f8;
 }
 
@@ -75,13 +76,17 @@ body {
   background: #fff;
   border: 1px solid #e7e7e7;
   border-radius: 0 0 6px 6px;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
 }
 
 #habit-table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
+  min-width: 760px;
 }
 
 #habit-table thead {
@@ -287,5 +292,102 @@ body {
   #habit-table th.name,
   #habit-table td.name {
     width: 120px;
+  }
+}
+
+@media (max-width: 900px) {
+  .top-bar {
+    padding: 10px 12px;
+  }
+
+  .title-group h1 {
+    font-size: 20px;
+  }
+
+  .month-nav h2 {
+    font-size: 18px;
+  }
+
+  #habit-table {
+    min-width: 640px;
+  }
+
+  #habit-table th,
+  #habit-table td {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+
+  #habit-table th.name,
+  #habit-table td.name {
+    width: 120px;
+    padding-left: 12px;
+  }
+
+  .chart-area {
+    height: 220px;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 0 6px;
+  }
+
+  .app {
+    margin: 10px auto 16px;
+  }
+
+  .top-bar {
+    justify-content: center;
+  }
+
+  .icon-button,
+  .ghost-button {
+    padding: 4px 6px;
+    font-size: 13px;
+  }
+
+  .month-nav {
+    padding: 12px 0 8px;
+    gap: 10px;
+  }
+
+  .month-nav h2 {
+    font-size: 16px;
+  }
+
+  #habit-table {
+    min-width: 560px;
+  }
+
+  #habit-table th:first-child,
+  #habit-table td:first-child {
+    width: 34px;
+  }
+
+  #habit-table th.name,
+  #habit-table td.name {
+    width: 110px;
+    padding-left: 10px;
+  }
+
+  .cell-box input[type='checkbox'] {
+    width: 16px;
+    height: 16px;
+  }
+
+  .chart-controls {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chart-area {
+    height: 200px;
+  }
+
+  .pill-toggle button {
+    padding: 5px 10px;
+    font-size: 13px;
   }
 }
