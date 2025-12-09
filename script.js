@@ -10,7 +10,12 @@ const dom = {
   addHabit: document.getElementById('add-habit'),
   chartToggle: document.getElementById('chart-toggle'),
   canvas: document.getElementById('progress-canvas'),
+  visitorPill: document.getElementById('visitor-pill'),
 };
+
+const VISITOR_NAMESPACE = 'ishantmadaan-tracker';
+const VISITOR_KEY = 'visits';
+const VISITOR_LOCAL_KEY = 'visitor-hit-date';
 
 function ensureCanvasSize() {
   const ratio = window.devicePixelRatio || 1;
@@ -341,6 +346,32 @@ function syncChartButtons() {
   });
 }
 
+function loadVisitorCount() {
+  if (!dom.visitorPill) return;
+  const todayKey = new Date().toISOString().slice(0, 10);
+  const hitFlagKey = `${VISITOR_LOCAL_KEY}-${todayKey}`;
+  const hasHitToday = localStorage.getItem(hitFlagKey);
+
+  const base = 'https://api.countapi.xyz';
+  const hitUrl = `${base}/hit/${VISITOR_NAMESPACE}/${VISITOR_KEY}`;
+  const getUrl = `${base}/get/${VISITOR_NAMESPACE}/${VISITOR_KEY}`;
+  const url = hasHitToday ? getUrl : hitUrl;
+
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      if (typeof data.value === 'number') {
+        dom.visitorPill.textContent = `You are visitor #${data.value}`;
+        if (!hasHitToday) localStorage.setItem(hitFlagKey, '1');
+      } else {
+        dom.visitorPill.textContent = 'Visitor count unavailable';
+      }
+    })
+    .catch(() => {
+      dom.visitorPill.textContent = 'Visitor count unavailable';
+    });
+}
+
 function update() {
   const activeMonth = getActiveMonthDate();
   renderMonthLabel(activeMonth);
@@ -377,3 +408,4 @@ function attachEvents() {
 
 attachEvents();
 update();
+loadVisitorCount();
